@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DynamicTel } from './dynamic-tel';
+import { DisplayTel } from './display-tel';
 
-describe('DynamicTel', () => {
-  let component: DynamicTel;
-  let fixture: ComponentFixture<DynamicTel>;
+describe('DisplayTel', () => {
+  let component: DisplayTel;
+  let fixture: ComponentFixture<DisplayTel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DynamicTel],
-    }).compileComponents();
+      imports: [DisplayTel]
+    })
+    .compileComponents();
 
-    fixture = TestBed.createComponent(DynamicTel);
+    fixture = TestBed.createComponent(DisplayTel);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
