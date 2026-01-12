@@ -1,0 +1,30 @@
+.app-cmp-section {
+  display: flex;
+  flex-direction: column;
+  width: min(400px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+
+  & > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+
+    & > label {
+      flex-grow: 1;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+
+  .app-cmp-number-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+}

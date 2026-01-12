@@ -1,0 +1,16 @@
+<div class="app-cmp-number">
+  <label>
+    <b
+      >Number <span class="app-title-number">{{ index() + 1 }}</span></b
+    >
+    <input type="number" #inp [value]="item().value" (input)="update.emit(inp.valueAsNumber)" />
+  </label>
+  <button
+    type="button"
+    class="app-cl-btn app-cl-warn"
+    (click)="remove.emit()"
+    [disabled]="disableRemove()"
+  >
+    <i class="material-symbols-outlined">delete_forever</i>
+  </button>
+</div>

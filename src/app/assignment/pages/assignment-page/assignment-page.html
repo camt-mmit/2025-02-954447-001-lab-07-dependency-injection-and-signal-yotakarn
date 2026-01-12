@@ -1,0 +1,19 @@
+<div class="app-ctl-global">
+  <button type="button" class="app-cl-btn app-cl-primary" (click)="addSection()">
+    + Add Section
+  </button>
+</div>
+
+<main class="app-cmp-main-container">
+  @for (sec of sections(); track $index) {
+    <app-dynamic-section
+      [section]="sec"
+      [index]="$index"
+      [disableRemoveSection]="sections().length <= 1"
+      (addNumber)="addNumber(sec)"
+      (removeNumber)="removeNumber(sec, $event)"
+      (removeSection)="removeSection($index)"
+      (changed)="refresh()"
+    />
+  }
+</main>

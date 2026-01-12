@@ -1,0 +1,9 @@
+@use '../../scss/dymanic-component';
+
+:host {
+  display: block;
+}
+
+.app-cmp-number {
+  @extend .app-cmp-number;
+}

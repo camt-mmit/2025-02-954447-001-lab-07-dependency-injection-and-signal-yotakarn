@@ -1,0 +1,9 @@
+@use '../../scss/dynamic-list';
+
+:host {
+  display: block;
+}
+
+article {
+  @extend .app-cmp-section;
+}
