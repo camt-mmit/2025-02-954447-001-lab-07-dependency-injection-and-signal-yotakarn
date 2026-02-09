@@ -3,11 +3,13 @@
 /* --- 1. Global & Layout Styles --- */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 20px;
-  background-color: #f4f6f8; /* พื้นหลังสีเทาอ่อน สบายตา */
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: #f4f6f8;
 }
 
-/* --- 2. Navigation Styles (คงของเดิมไว้แต่ปรับสีให้ทันสมัยขึ้น) --- */
+/* --- 2. Navigation Styles --- */
 nav ul {
   list-style-type: none;
   display: flex;
@@ -20,7 +22,7 @@ nav ul {
 nav ul li {
   width: 120px;
   text-align: center;
-  border: 2px solid #ddd; /* เปลี่ยนจากน้ำเงินล้วน เป็นสีเทาอ่อน */
+  border: 2px solid #ddd;
   border-radius: 10px;
   margin: 5px;
   background-color: white;
@@ -28,7 +30,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-  border-color: #1976d2; /* Hover แล้วเป็นสีฟ้า */
+  border-color: #1976d2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -70,7 +72,6 @@ svg {
 
 /* --- 3. Component Styles (Dynamic Section & Input) --- */
 
-/* ปุ่มทั่วไป (Add Section, Add Number) */
 .app-add-btn {
   background-color: #4caf50; /* สีเขียว */
   color: white;
@@ -84,7 +85,7 @@ svg {
     background-color 0.2s,
     transform 0.1s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 5px; /* ระยะห่างเล็กน้อย */
+  margin: 0 5px;
 
   &:hover {
     background-color: #43a047;
@@ -143,7 +144,7 @@ h2 {
   background-color: white;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
-  padding: 25px;
+  padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 25px;
   gap: 20px;
@@ -192,7 +193,7 @@ h2 {
 .app-section-result {
   background: linear-gradient(135deg, #1976d2, #42a5f5); /* ไล่สีสวยงาม */
   color: white;
-  padding: 20px 30px;
+  padding: 5px 30px;
   border-radius: 12px;
   font-size: 20px;
   font-weight: bold;
