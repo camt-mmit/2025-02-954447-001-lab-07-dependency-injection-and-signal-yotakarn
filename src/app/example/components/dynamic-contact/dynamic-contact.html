@@ -1,17 +1,8 @@
 <header>
-  <span>
-    <button type="button" (click)="addContact()" class="app-cmp-button app-cl-filled">
-      <i class="material-symbols-outlined">post_add</i>
-      Contact
-    </button>
-  </span>
-
-  <span class="-cl-float-right">
-    <span class="-cmp-contacts-summary app-cl-number">({{ contacts().length | number }})</span>
-  </span>
+  <button type="button" (click)="addContact()">+ Contact</button>
 </header>
 
-<ul class="-cmp-list">
+<ul>
   @for (contact of contacts(); track contact) {
     <li>
       <app-dynamic-tel

@@ -1,5 +1,9 @@
-// src/app/assignment/routes.ts
 import { Routes } from '@angular/router';
-import { AssignmentPage } from './pages/assignment-page/assignment-page';
+import { DynamicSection } from './components/dynamic-section/dynamic-section';
 
-export default [{ path: '', component: AssignmentPage }] satisfies Routes;
+export default [
+  {
+    path: '',
+    component: DynamicSection,
+  },
+] as Routes;

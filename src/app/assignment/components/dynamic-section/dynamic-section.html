@@ -1,43 +1,12 @@
-<article class="app-cmp-section">
-  <header>
-    <button type="button" class="app-cl-btn app-cl-primary" (click)="addNumber.emit()">
-      + Input
-    </button>
-
-    <b>Section {{ index() + 1 }}</b>
-
-    <button
-      type="button"
-      class="app-cl-btn app-cl-warn app-cl-icon"
-      (click)="removeSection.emit()"
-      [disabled]="disableRemoveSection()"
-    >
-      Delete
-    </button>
-  </header>
-
-  <div class="app-cl-column-container">
-    <section class="app-cmp-number-list">
-      @for (num of section().numbers; track $index) {
-        <app-dynamic-input
-          [item]="num"
-          [index]="$index"
-          [disableRemove]="section().numbers.length <= 1"
-          (update)="num.value = $event; changed.emit()"
-          (remove)="removeNumber.emit($index)"
-        />
-      }
-    </section>
-
-    <section>
-      <div class="app-cmp-number">
-        <label>
-          <b>Result</b>
-          <output class="app-cl-number">
-            {{ total().toLocaleString() }}
-          </output>
-        </label>
-      </div>
-    </section>
-  </div>
-</article>
+<nav>
+  <button (click)="addSection()" class="app-add-btn">Add Section</button>
+</nav>
+@for (section of sections(); track section) {
+  <app-dynamic-input
+    [number]="$index + 1"
+    [section]="section"
+    [removable]="$count > 1"
+    (sectionChange)="changeSection($index, $event)"
+    (remove)="removeSection($index)"
+  />
+}

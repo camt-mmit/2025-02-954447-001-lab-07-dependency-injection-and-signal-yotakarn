@@ -1,7 +1,7 @@
-// src/app/assignment/types.ts
-export interface NumberItem {
+export interface NumberModel {
   value: number;
 }
-export interface SectionItem {
-  numbers: NumberItem[];
+
+export interface SectionModel {
+  numbers: NumberModel[];
 }

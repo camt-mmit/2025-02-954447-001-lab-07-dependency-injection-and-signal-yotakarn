@@ -8,9 +8,8 @@ describe('DynamicInput', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DynamicInput]
-    })
-    .compileComponents();
+      imports: [DynamicInput],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DynamicInput);
     component = fixture.componentInstance;

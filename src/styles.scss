@@ -1,279 +1,202 @@
 /* You can add global styles to this file, and also import other style files */
-@use './scss/common';
 
-:root {
-  // == Static Properties ==================================================
-  --sys-brand-primary-color: #0000ff;
-  --sys-brand-secondary-color: #00ff00;
-
-  --sys-font: 'Roboto Flex', 'Noto Sans Thai Looped', sans-serif;
-  --sys-monospace-font: 'Roboto Mono', monospace;
-
-  --sys-surface-color: light-dark(#ffffff, #121212);
-  --sys-surface-container-color: light-dark(#808080, #404040);
-  --sys-on-surface-color: light-dark(#333333, #ffffff);
-  --sys-warn-color: #ff0000;
-  --sys-on-warn-color: #ffffff;
-
-  --sys-gap: 4px;
-  --sys-column-gap: calc(2 * var(--sys-gap));
-  --sys-row-gap: var(--sys-gap);
-
-  // ---- Theme Properties --------------------------------------------------
-  --sys-primary-color: light-dark(
-    var(--sys-brand-primary-color),
-    color-mix(in srgb, var(--sys-brand-primary-color), #ffffff 25%)
-  );
-  --sys-on-primary-color: #ffffff;
-
-  --sys-secondary-color: light-dark(
-    var(--sys-brand-secondary-color),
-    color-mix(in srgb, var(--sys-brand-secondary-color), #ffffff 25%)
-  );
-  --sys-on-secondary-color: #ffffff;
-
-  // == Application properties ==================================================
-  --app-font: var(--sys-font);
-  --app-monospace-font: var(--sys-monospace-font);
-
-  --app-surface-color: var(--sys-surface-color);
-  --app-surface-container-color: var(--sys-surface-container-color);
-  --app-on-surface-color: var(--sys-on-surface-color);
-  --app-warn-color: var(--sys-warn-color);
-  --app-on-warn-color: var(--sys-on-warn-color);
-
-  --app-gap: var(--sys-gap);
-  --app-column-gap: var(--sys-column-gap);
-  --app-row-gap: var(--sys-row-gap);
-
-  // ---- Theme Properties --------------------------------------------------
-  --app-primary-color: var(--sys-primary-color);
-  --app-on-primary-color: var(--sys-on-primary-color);
-
-  --app-secondary-color: var(--sys-secondary-color);
-  --app-on-secondary-color: var(--sys-on-secondary-color);
-
-  color-scheme: light dark;
-
-  color: var(--app-on-surface-color);
-  background-color: var(--app-surface-color);
-
-  font-family: var(--app-font);
-  font-size: 16px;
-
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-
-  &[data-theme='light'] {
-    color-scheme: light;
-  }
-
-  &[data-theme='dark'] {
-    color-scheme: dark;
-  }
-}
-
-:root,
+/* --- 1. Global & Layout Styles --- */
 body {
-  @include common.layout-block();
-
-  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px;
+  background-color: #f4f6f8; /* พื้นหลังสีเทาอ่อน สบายตา */
 }
 
-input,
-textarea {
-  font-size: inherit;
-}
-
-.app-cmp-flex-row {
-  display: inline-flex;
-  flex-direction: row;
+/* --- 2. Navigation Styles (คงของเดิมไว้แต่ปรับสีให้ทันสมัยขึ้น) --- */
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-
-  & > .app-cl-flex {
-    flex: 1 0 auto;
-  }
-
-  & > .app-cl-meta {
-    @include common.layout-block();
-
-    display: inline-block;
-    margin-left: auto;
-  }
+  padding: 0;
+  margin-bottom: 30px;
 }
 
-.app-cmp-button {
-  @layer {
-    & {
-      --prop-color: var(--app-primary-color);
-      --prop-on-color: var(--app-on-primary-color);
+nav ul li {
+  width: 120px;
+  text-align: center;
+  border: 2px solid #ddd; /* เปลี่ยนจากน้ำเงินล้วน เป็นสีเทาอ่อน */
+  border-radius: 10px;
+  margin: 5px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
 
-      --prop-text-color: var(--prop-color);
-      --prop-border-color: var(--prop-text-color);
-      --prop-background-color: transpalent;
-      --prop-on-hover-background-color: var(--app-surface-container-color);
+nav ul li:hover {
+  border-color: #1976d2; /* Hover แล้วเป็นสีฟ้า */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-      --prop-border-style: 1px solid var(--prop-border-color);
-
-      &.app-cl-filled {
-        --prop-on-hover-background-color: color-mix(
-          in srgb,
-          var(--prop-background-color),
-          var(--app-surface-container-color) 25%
-        );
-      }
-    }
-  }
-
-  @include common.layout-block();
-
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+nav ul li a {
+  display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 4px;
-
-  cursor: pointer;
-
-  color: var(--prop-text-color);
-  background-color: var(--prop-background-color);
-  border: var(--prop-border-style);
-  border-radius: 4px;
-
-  padding: 0.5em 1ch;
-
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  padding: 15px 0;
+  text-decoration: none;
+  color: #555;
   font-weight: bold;
+}
 
-  &:hover:not(:disabled) {
-    background-color: var(--prop-on-hover-background-color);
+/* Active State */
+.app-st-active {
+  background-color: #e3f2fd; /* ฟ้าอ่อน */
+  border-color: #1976d2 !important;
+}
+
+.app-st-active a {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+/* Icons & Logo */
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
+svg {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* --- 3. Component Styles (Dynamic Section & Input) --- */
+
+/* ปุ่มทั่วไป (Add Section, Add Number) */
+.app-add-btn {
+  background-color: #4caf50; /* สีเขียว */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 5px; /* ระยะห่างเล็กน้อย */
+
+  &:hover {
+    background-color: #43a047;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* ปุ่มลบ (X) */
+.remove-btn {
+  background-color: #ef5350; /* สีแดง */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 5px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #e53935;
   }
 
   &:disabled {
-    opacity: 0.25;
+    background-color: #e0e0e0;
+    color: #9e9e9e;
     cursor: not-allowed;
   }
 }
 
-.app-cmp-nav {
-  @layer {
-    & {
-      --prop-color: var(--app-primary-color);
-      --prop-on-color: var(--app-on-primary-color);
-
-      --prop-text-color: var(--prop-color);
-      --prop-border-color: var(--prop-text-color);
-      --prop-background-color: transpalent;
-      --prop-filling-color: var(--app-surface-container-color);
-      --prop-column-gap: var(--app-column-gap);
-      --prop-row-gap: var(--app-row-gap);
-
-      --prop-border-style: 1px solid var(--prop-border-color);
-
-      &.app-cl-filled {
-        --prop-filling-color: color-mix(
-          in srgb,
-          var(--prop-background-color),
-          var(--app-surface-container-color) 25%
-        );
-
-        & > *:not(.app-st-active):not(:hover) {
-          --prop-text-color: var(--app-on-surface-color);
-        }
-      }
-    }
-  }
-
-  @include common.layout-block();
-
+/* หัวข้อ Section (เช่น Section 1, Section 2) */
+h2 {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  color: #333;
+}
+
+.app-section-title {
+  color: #1976d2;
+  font-size: 1.2rem;
+}
+
+/* กล่องครอบ Input และ Result */
+.app-input-number {
+  display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+/* ฝั่งซ้าย (รายการ Input) */
+.left {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+.app-input-number-item {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  width: 100px;
+  text-align: center;
+  font-size: 16px;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #1976d2;
+  }
+}
+
+/* ฝั่งขวา (ผลลัพธ์ Result) */
+.right {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  column-gap: var(--prop-column-gap);
-  row-gap: var(--prop-row-gap);
-
-  margin-top: 8px;
-  margin-bottom: 8px;
-
-  list-style: none;
-
-  & > * {
-    @include common.layout-block();
-
-    display: inline-block;
-
-    color: var(--prop-text-color);
-    font-weight: bold;
-    border: var(--prop-border-style);
-    border-radius: 4px;
-    overflow: hidden;
-
-    &.app-st-active {
-      background-color: var(--prop-filling-color);
-    }
-
-    &:not(.app-st-active):hover {
-      background-color: color(from var(--prop-filling-color) srgb r g b / 0.5);
-    }
-
-    & > a {
-      @include common.layout-block();
-
-      display: inline-flex;
-      flex-direction: row;
-      align-items: center;
-      column-gap: var(--prop-column-gap);
-
-      height: 100%;
-
-      padding: 0.25em 1ch;
-
-      color: inherit;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-  }
+  min-width: 200px;
 }
 
-.app-cl-code,
-input[type='number'],
-.app-cl-number {
-  font-family: var(--app-monospace-font);
-}
-
-input[type='number'],
-.app-cl-number {
-  text-align: right;
-}
-
-@layer {
-  .app-cl-warn {
-    --prop-color: var(--app-warn-color);
-    --prop-on-color: var(--app-on-warn-color);
-  }
-
-  .app-cl-secondary {
-    --prop-color: var(--app-secondary-color);
-    --prop-on-color: var(--app-on-secondary-color);
-  }
-
-  .app-cl-filled {
-    --prop-text-color: var(--prop-on-color);
-    --prop-border-color: transparent;
-    --prop-background-color: var(--prop-color);
-
-    --prop-border-style: 0px solid var(--prop-border-color);
-  }
-}
-
-// Material Symbols
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+.app-section-result {
+  background: linear-gradient(135deg, #1976d2, #42a5f5); /* ไล่สีสวยงาม */
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+  min-width: 150px;
 }

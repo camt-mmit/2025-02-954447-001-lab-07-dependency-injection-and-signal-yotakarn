@@ -1,16 +1,32 @@
-<div class="app-cmp-number">
-  <label>
-    <b
-      >Number <span class="app-title-number">{{ index() + 1 }}</span></b
-    >
-    <input type="number" #inp [value]="item().value" (input)="update.emit(inp.valueAsNumber)" />
-  </label>
-  <button
-    type="button"
-    class="app-cl-btn app-cl-warn"
-    (click)="remove.emit()"
-    [disabled]="disableRemove()"
-  >
-    <i class="material-symbols-outlined">delete_forever</i>
-  </button>
+<h2>
+  <span class="app-section-title">Section {{ number() }}</span>
+  <button class="remove-btn" (click)="remove.emit()" [disabled]="!removable()">X</button>
+</h2>
+
+<div class="app-input-number">
+  <div class="left">
+    @for (n of section().numbers; track n) {
+      <div class="mid">
+        {{ $index + 1 }})
+        <input
+          type="number"
+          [value]="n.value"
+          (change)="changeNumber($index, $event.target.valueAsNumber)"
+          class="app-input-number-item"
+        />
+        <button (click)="addNumber()" class="app-add-btn">+</button>
+        <button
+          class="remove-btn"
+          (click)="removeNumber($index)"
+          [disabled]="section().numbers.length === 1"
+        >
+          X
+        </button>
+      </div>
+    }
+  </div>
+
+  <div class="right">
+    <div class="app-section-result">Result {{ total() | number }}</div>
+  </div>
 </div>

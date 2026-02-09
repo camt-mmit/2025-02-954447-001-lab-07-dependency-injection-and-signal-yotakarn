@@ -8,9 +8,8 @@ describe('DynamicSection', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DynamicSection]
-    })
-    .compileComponents();
+      imports: [DynamicSection],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DynamicSection);
     component = fixture.componentInstance;

@@ -1,52 +1,28 @@
 <header>
-  <button type="button" (click)="addTel()" class="app-cmp-button app-cl-filled">
-    <i class="material-symbols-outlined">add</i>
-    Tel
-  </button>
+  <button type="button" (click)="addTel()">+ Tel</button><br /><br />
   <label>
-    <b>
-      Contact
-      @if (!numberIsNaN()) {
-        <span class="-cl-label-no app-cl-number">{{ number() | number }}</span>
-      }
-    </b>
+    <b>Contact {{ number() }}</b>
     <input type="text" #nameElem [value]="contact().name" (change)="changeName(nameElem.value)" />
-    <span class="-cmp-tels-summary app-cl-number">({{ contact().tels.length | number }})</span>
+    <span>({{ contact().tels.length }})</span>
   </label>
-  <button
-    type="button"
-    [disabled]="!removable()"
-    (click)="remove.emit()"
-    class="app-cmp-button app-cl-warn app-cl-filled"
-  >
-    <i class="material-symbols-outlined">delete_forever</i>
-  </button>
+
+  <button type="button" [disabled]="!removable()" (click)="remove.emit()">X</button>
 </header>
 
-<ul class="-cmp-list">
+<ul>
   @for (tel of contact().tels; track tel) {
     <li>
       <label>
-        <b>
-          Tel
-          <span class="-cl-label-no app-cl-number">{{ $index + 1 | number }}</span>
-        </b>
+        <b>Tel {{ $index + 1 }} </b>
         <input
           type="text"
           #telElem
           [value]="tel.value"
           (change)="changeTel($index, telElem.value)"
-          class="app-cl-code"
         />
       </label>
-      <button
-        type="button"
-        [disabled]="$count === 1"
-        (click)="removeTel($index)"
-        class="app-cmp-button app-cl-warn app-cl-filled"
-      >
-        <i class="material-symbols-outlined">delete_forever</i>
-      </button>
+      <button type="button" [disabled]="$count === 1" (click)="removeTel($index)">X</button>
     </li>
+    <br />
   }
 </ul>

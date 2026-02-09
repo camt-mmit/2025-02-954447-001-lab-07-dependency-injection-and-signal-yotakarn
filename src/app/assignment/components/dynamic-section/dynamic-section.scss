@@ -1,9 +1,11 @@
-@use '../../scss/dynamic-list';
-
-:host {
-  display: block;
+/*.app-add-btn {
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-article {
-  @extend .app-cmp-section;
-}
+.app-add-btn:hover {
+  background-color: grey;
+  color: white;
+}*/

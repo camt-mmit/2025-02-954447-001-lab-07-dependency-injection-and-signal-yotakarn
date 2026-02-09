@@ -1,26 +1,34 @@
-// src/app/assignment/components/dynamic-section/dynamic-section.ts
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { SectionItem } from '../../types';
+import { ChangeDetectionStrategy, Component, effect, inject, model } from '@angular/core';
+import { numbersToSections, sectionToNumbers } from '../../helpers';
+import { SectionModel } from '../../types';
 import { DynamicInput } from '../dynamic-input/dynamic-input';
+import { SectionStorage } from '../../services/section.storage';
 
 @Component({
   selector: 'app-dynamic-section',
-  standalone: true,
   imports: [DynamicInput],
   templateUrl: './dynamic-section.html',
   styleUrl: './dynamic-section.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush, // ช่วยให้ประสิทธิภาพดีขึ้นและทำงานร่วมกับ Signal ได้ดี
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicSection {
-  section = input.required<SectionItem>();
-  index = input.required<number>();
-  disableRemoveSection = input<boolean>(false);
+  readonly dataStorage = inject(SectionStorage);
+  readonly sections = model(numbersToSections(this.dataStorage.get()));
 
-  addNumber = output<void>();
-  removeNumber = output<number>();
-  removeSection = output<void>();
-  changed = output<void>();
+  constructor() {
+    effect(() => {
+      this.dataStorage.set(sectionToNumbers(this.sections()));
+    });
+  }
+  addSection() {
+    this.sections.update((secs) => [...secs, { numbers: [{ value: 0 }] }]);
+  }
 
-  // คำนวณผลรวมแบบ Real-time โดยใช้ computed signal
-  total = computed(() => this.section().numbers.reduce((acc, curr) => acc + (curr.value || 0), 0));
+  removeSection(index: number) {
+    this.sections.update((secs) => secs.filter((_, i) => i !== index));
+  }
+
+  changeSection(index: number, value: SectionModel) {
+    this.sections.update((secs) => secs.map((s, i) => (i === index ? value : s)));
+  }
 }

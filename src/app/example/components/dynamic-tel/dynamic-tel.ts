@@ -1,40 +1,32 @@
-import { DecimalPipe } from '@angular/common';
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  booleanAttribute,
-  computed,
   input,
   model,
-  numberAttribute,
   output,
 } from '@angular/core';
 import { createContact, createTel } from '../../helpers';
 
 @Component({
   selector: 'app-dynamic-tel',
-  imports: [DecimalPipe],
+  imports: [],
   templateUrl: './dynamic-tel.html',
   styleUrl: './dynamic-tel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    role: 'section',
-  },
 })
 export class DynamicTel {
-  readonly number = input(NaN, { transform: numberAttribute });
+  readonly number = input<number | null>(null);
   readonly contact = model(createContact());
   readonly removable = input(true, { transform: booleanAttribute });
 
   readonly remove = output<void>();
 
-  protected numberIsNaN = computed(() => Number.isNaN(this.number()));
-
-  protected changeName(value: string): void {
+  protected changeName(name: string): void {
     this.contact.update((contact) => {
       return {
         ...contact,
-        name: value,
+        name,
       };
     });
   }
@@ -46,6 +38,17 @@ export class DynamicTel {
       return {
         ...rest,
         tels: [...tels, createTel()],
+      };
+    });
+  }
+
+  protected removeTel(index: number): void {
+    this.contact.update((contact) => {
+      const { tels, ...rest } = contact;
+
+      return {
+        ...rest,
+        tels: tels.filter((_value, i) => i !== index),
       };
     });
   }
@@ -63,17 +66,6 @@ export class DynamicTel {
 
           return tel;
         }),
-      };
-    });
-  }
-
-  protected removeTel(index: number): void {
-    this.contact.update((contact) => {
-      const { tels, ...rest } = contact;
-
-      return {
-        ...rest,
-        tels: tels.filter((_value, i) => i !== index),
       };
     });
   }
